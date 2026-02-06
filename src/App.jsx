@@ -1,14 +1,10 @@
 import React from 'react';
 import GFMIdeasGenerator from './GFMIdeasGenerator';
-import { Feature108 } from "@/components/blocks/feature-108";
 
 function App() {
   return (
-    <div className="bg-background text-foreground min-h-screen">
+    <div className="bg-background text-foreground min-h-screen font-sans antialiased">
       <GFMIdeasGenerator />
-      <div className="border-t border-border">
-        <Feature108 />
-      </div>
     </div>
   );
 }

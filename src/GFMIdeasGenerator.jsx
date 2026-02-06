@@ -1,9 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { 
   Zap, ArrowRight, Download, RefreshCw, 
-  Copy, Check, MoreHorizontal, Layers, 
-  BarChart3, Settings, ShieldCheck
+  Copy, Check, ShieldCheck, Layers
 } from 'lucide-react';
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const GFMIdeasGenerator = () => {
   const [step, setStep] = useState(0); 
@@ -22,9 +28,7 @@ const GFMIdeasGenerator = () => {
 
   const runSimulation = () => {
     if (!inputs.niche || !inputs.audience) return;
-
     setStep(2); 
-    
     const sequences = [
       "Initializing core systems...",
       `Analyzing market vector: ${inputs.niche}...`,
@@ -32,14 +36,12 @@ const GFMIdeasGenerator = () => {
       "Generating strategic angles...",
       "Compiling final matrix..."
     ];
-
     let i = 0;
     const interval = setInterval(() => {
       setLoadingText(sequences[i]);
       i++;
       if (i >= sequences.length) clearInterval(interval);
     }, 700);
-
     setTimeout(() => {
       generateIdeas();
       setStep(3);
@@ -56,12 +58,6 @@ const GFMIdeasGenerator = () => {
       { id: 4, type: "Insight", hook: `"I analyzed top 1% of ${niche} leaders. Here is what I found."`, angle: "Data", format: "Deep Dive", engagement: "High" },
       { id: 5, type: "Framework", hook: `"My proven framework for effortless ${goal}."`, angle: "System", format: "Guide", engagement: "Very High" },
       { id: 6, type: "Future", hook: `"Where ${niche} is going in the next 12 months."`, angle: "Trend", format: "Prediction", engagement: "Medium" },
-      { id: 7, type: "Tools", hook: `"The exact stack I use for ${goal}."`, angle: "Resource", format: "Curated List", engagement: "High" },
-      { id: 8, type: "Comparison", hook: `"${niche} Veterans vs Beginners: The key difference."`, angle: "Mindset", format: "Comparison", engagement: "Medium" },
-      { id: 9, type: "Unpopular Opinion", hook: `"Why everyone is wrong about ${goal}."`, angle: "Disruptive", format: "Statement", engagement: "High" },
-      { id: 10, type: "How-To", hook: `"A simple guide to ${goal} for busy ${audience}."`, angle: "Simplicity", format: "Tutorial", engagement: "High" },
-      { id: 11, type: "Story", hook: `"The biggest lesson I learned in ${niche}."`, angle: "Personal", format: "Story", engagement: "Very High" },
-      { id: 12, type: "Quick Win", hook: `"One small tweak to improve your ${goal} today."`, angle: "Action", format: "Tip", engagement: "High" }
     ];
     setIdeas(generatedIdeas);
   };
@@ -75,78 +71,74 @@ const GFMIdeasGenerator = () => {
   // --- Components ---
 
   const Navbar = () => (
-    <nav className="w-full h-16 border-b border-slate-800 bg-slate-950/80 backdrop-blur fixed top-0 z-50 flex items-center justify-between px-6 lg:px-12">
+    <nav className="w-full h-16 border-b bg-background/80 backdrop-blur fixed top-0 z-50 flex items-center justify-between px-6 lg:px-12">
       <div className="flex items-center gap-3">
-        <div className="bg-blue-600 w-8 h-8 rounded-lg flex items-center justify-center text-white font-bold text-sm shadow-lg shadow-blue-900/20">
+        <div className="bg-primary w-8 h-8 rounded-lg flex items-center justify-center text-primary-foreground font-bold text-sm shadow-sm">
           G
         </div>
         <div className="leading-tight">
-          <h1 className="font-bold text-sm text-white tracking-wide">GFM<span className="text-slate-400 font-normal">INTELLIGENCE</span></h1>
+          <h1 className="font-bold text-sm text-foreground tracking-wide">GFM<span className="text-muted-foreground font-normal">INTELLIGENCE</span></h1>
         </div>
       </div>
       <div className="flex items-center gap-4">
         {step > 0 && (
-          <div className="hidden md:flex items-center gap-2 px-3 py-1 bg-emerald-500/10 border border-emerald-500/20 rounded-full">
-            <div className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></div>
-            <span className="text-xs font-medium text-emerald-400">System Active</span>
-          </div>
+          <Badge variant="outline" className="gap-2 bg-emerald-500/10 border-emerald-500/20 text-emerald-500 hover:bg-emerald-500/10">
+            <div className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse"></div>
+            System Active
+          </Badge>
         )}
       </div>
     </nav>
   );
 
   const Intro = () => (
-    <div className="flex flex-col items-center justify-center min-h-screen px-6 text-center pt-16">
-       <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-800 border border-slate-700 text-xs font-medium text-slate-300 mb-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
-         <ShieldCheck className="w-3 h-3 text-blue-400" /> Professional Grade Tool
-       </div>
+    <div className="flex flex-col items-center justify-center min-h-[85vh] px-6 text-center pt-16">
+       <Badge variant="secondary" className="mb-8 gap-2 py-1.5 px-4 text-xs font-medium">
+         <ShieldCheck className="w-3.5 h-3.5 text-primary" /> Professional Grade Tool
+       </Badge>
        
-       <h1 className="text-5xl md:text-7xl font-bold text-white tracking-tight mb-6 max-w-4xl animate-in fade-in slide-in-from-bottom-5 duration-700 delay-100">
+       <h1 className="text-5xl md:text-7xl font-bold text-foreground tracking-tight mb-6 max-w-4xl animate-in fade-in slide-in-from-bottom-5 duration-700 delay-100">
          Content Strategy <br/>
-         <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400">Engineered.</span>
+         <span className="text-primary">Engineered.</span>
        </h1>
        
-       <p className="text-lg md:text-xl text-slate-400 max-w-2xl mb-10 leading-relaxed animate-in fade-in slide-in-from-bottom-6 duration-700 delay-200">
+       <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mb-10 leading-relaxed animate-in fade-in slide-in-from-bottom-6 duration-700 delay-200">
          Generate high-leverage content angles tailored specifically to your niche audience. 
-         A precision tool for serious creators.
+         Precision engineered for modern creators.
        </p>
        
-       <button 
+       <Button 
          onClick={() => setStep(1)} 
-         className="group bg-blue-600 hover:bg-blue-500 text-white text-base font-semibold py-4 px-8 rounded-xl transition-all shadow-[0_0_20px_rgba(37,99,235,0.3)] hover:shadow-[0_0_30px_rgba(37,99,235,0.5)] flex items-center gap-2 animate-in fade-in slide-in-from-bottom-7 duration-700 delay-300"
+         size="lg"
+         className="h-12 px-8 gap-2 text-base shadow-lg hover:shadow-primary/25 animate-in fade-in slide-in-from-bottom-7 duration-700 delay-300"
        >
-         Initialize System <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-       </button>
+         Initialize System <ArrowRight className="w-4 h-4" />
+       </Button>
     </div>
   );
 
   const InputForm = () => (
-    <div className="min-h-screen flex items-center justify-center px-4 pt-20 pb-10">
-      <div className="w-full max-w-2xl bg-slate-900 border border-slate-800 rounded-2xl p-8 md:p-12 shadow-2xl animate-in fade-in zoom-in-95 duration-300">
-        <div className="mb-8">
-          <h2 className="text-2xl font-bold text-white mb-2">Configure Parameters</h2>
-          <p className="text-slate-400 text-sm">Define the target vector for your content generation matrix.</p>
-        </div>
-
-        <div className="space-y-6">
+    <div className="min-h-[85vh] flex items-center justify-center px-4 pt-20 pb-10">
+      <Card className="w-full max-w-2xl animate-in fade-in zoom-in-95 duration-300 border-muted">
+        <CardHeader className="mb-2">
+          <CardTitle>Configure Parameters</CardTitle>
+          <CardDescription>Define the target vector for your content generation matrix.</CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="space-y-2">
-              <label className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Niche / Industry</label>
-              <input 
+              <Label>Niche</Label>
+              <Input 
                 autoFocus
-                type="text" 
-                placeholder="e.g. B2B SaaS, Marketing..." 
-                className="w-full bg-slate-950 border border-slate-700 rounded-lg px-4 py-3 text-white placeholder-slate-600 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-none transition-all"
+                placeholder="e.g. B2B SaaS" 
                 value={inputs.niche}
                 onChange={(e) => setInputs({...inputs, niche: e.target.value})}
               />
             </div>
             <div className="space-y-2">
-              <label className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Target Audience</label>
-              <input 
-                type="text" 
-                placeholder="e.g. CTOs, Founders..." 
-                className="w-full bg-slate-950 border border-slate-700 rounded-lg px-4 py-3 text-white placeholder-slate-600 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-none transition-all"
+              <Label>Audience</Label>
+              <Input 
+                placeholder="e.g. CTOs" 
                 value={inputs.audience}
                 onChange={(e) => setInputs({...inputs, audience: e.target.value})}
               />
@@ -155,130 +147,114 @@ const GFMIdeasGenerator = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="space-y-2">
-              <label className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Primary Goal</label>
-              <div className="relative">
-                <select 
-                  className="w-full appearance-none bg-slate-950 border border-slate-700 rounded-lg px-4 py-3 text-white focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-none transition-all cursor-pointer"
-                  value={inputs.goal}
-                  onChange={(e) => setInputs({...inputs, goal: e.target.value})}
-                >
-                  <option value="" className="text-slate-500">Select objective...</option>
-                  <option value="Lead Generation">Lead Generation</option>
-                  <option value="Thought Leadership">Thought Leadership</option>
-                  <option value="Brand Awareness">Brand Awareness</option>
-                </select>
-                <MoreHorizontal className="absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500 pointer-events-none"/>
-              </div>
+              <Label>Goal</Label>
+              <Select onValueChange={(val) => setInputs({...inputs, goal: val})}>
+                <SelectTrigger>
+                  <SelectValue placeholder="Select objective..." />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="Lead Generation">Lead Generation</SelectItem>
+                  <SelectItem value="Thought Leadership">Thought Leadership</SelectItem>
+                  <SelectItem value="Brand Awareness">Brand Awareness</SelectItem>
+                </SelectContent>
+              </Select>
             </div>
             <div className="space-y-2">
-              <label className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Tone of Voice</label>
-              <div className="relative">
-                <select 
-                  className="w-full appearance-none bg-slate-950 border border-slate-700 rounded-lg px-4 py-3 text-white focus:border-blue-500 focus:ring-2 focus:ring-blue-500/20 outline-none transition-all cursor-pointer"
-                  value={inputs.tone}
-                  onChange={(e) => setInputs({...inputs, tone: e.target.value})}
-                >
-                  <option value="Professional">Professional</option>
-                  <option value="Contrarian">Contrarian</option>
-                  <option value="Empathetic">Empathetic</option>
-                </select>
-                <MoreHorizontal className="absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500 pointer-events-none"/>
-              </div>
+              <Label>Tone</Label>
+              <Select onValueChange={(val) => setInputs({...inputs, tone: val})} defaultValue="Professional">
+                <SelectTrigger>
+                  <SelectValue placeholder="Select tone..." />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="Professional">Professional</SelectItem>
+                  <SelectItem value="Contrarian">Contrarian</SelectItem>
+                  <SelectItem value="Empathetic">Empathetic</SelectItem>
+                </SelectContent>
+              </Select>
             </div>
           </div>
-        </div>
-
-        <div className="mt-10 pt-6 border-t border-slate-800">
-          <button 
+        </CardContent>
+        <CardFooter className="pt-2">
+          <Button 
             onClick={runSimulation}
             disabled={!inputs.niche || !inputs.audience || !inputs.goal}
-            className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-4 rounded-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 shadow-lg hover:shadow-blue-500/20"
+            className="w-full h-11 text-base font-semibold"
           >
-            <Zap className="w-5 h-5" /> Generate Ideas Matrix
-          </button>
-        </div>
-      </div>
+            <Zap className="mr-2 h-4 w-4" /> Generate Matrix
+          </Button>
+        </CardFooter>
+      </Card>
     </div>
   );
 
   const Loading = () => (
-    <div className="flex flex-col items-center justify-center min-h-screen px-4 animate-in fade-in duration-500">
-      <div className="relative w-24 h-24 mb-8">
-        <div className="absolute inset-0 border-t-4 border-blue-500 rounded-full animate-spin"></div>
-        <div className="absolute inset-3 border-r-4 border-indigo-500 rounded-full animate-spin reverse duration-1000 opacity-50"></div>
+    <div className="flex flex-col items-center justify-center min-h-[60vh] px-4 animate-in fade-in duration-500">
+      <div className="relative w-16 h-16 mb-8">
+        <div className="absolute inset-0 border-t-2 border-primary rounded-full animate-spin"></div>
+        <div className="absolute inset-2 border-r-2 border-primary/50 rounded-full animate-spin reverse duration-1000"></div>
       </div>
-      <h3 className="text-2xl font-bold text-white mb-2">Processing Data</h3>
-      <div className="h-8 flex items-center">
-        <span className="text-slate-400 font-mono text-sm">{loadingText}</span>
-      </div>
+      <h3 className="text-xl font-medium text-foreground mb-2">Processing Data</h3>
+      <p className="text-muted-foreground font-mono text-sm bg-muted px-3 py-1 rounded-md border border-border">{loadingText}</p>
     </div>
   );
 
   const Results = () => (
     <div className="min-h-screen pt-24 pb-20 px-6 max-w-7xl mx-auto animate-in fade-in slide-in-from-bottom-8 duration-500">
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-10 gap-4 border-b border-slate-800 pb-8">
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-10 gap-4 border-b pb-8">
         <div>
-          <h2 className="text-3xl font-bold text-white mb-2">Content Matrix</h2>
-          <div className="flex gap-2 text-sm">
-             <span className="bg-slate-800 border border-slate-700 text-slate-300 px-3 py-1 rounded-md">{inputs.niche}</span>
-             <span className="bg-slate-800 border border-slate-700 text-slate-300 px-3 py-1 rounded-md">{inputs.audience}</span>
+          <h2 className="text-3xl font-bold text-foreground mb-2">Content Matrix</h2>
+          <div className="flex gap-2">
+             <Badge variant="secondary" className="font-mono">{inputs.niche}</Badge>
+             <Badge variant="secondary" className="font-mono">{inputs.audience}</Badge>
           </div>
         </div>
         <div className="flex gap-3">
-           <button onClick={() => setStep(1)} className="px-4 py-2 bg-slate-900 border border-slate-700 text-slate-300 hover:text-white hover:border-slate-500 rounded-lg text-sm font-medium transition-all flex items-center gap-2">
+           <Button variant="outline" onClick={() => setStep(1)} size="sm" className="gap-2">
              <RefreshCw className="w-4 h-4"/> Reset
-           </button>
-           <button onClick={() => window.print()} className="px-4 py-2 bg-white text-slate-950 rounded-lg text-sm font-bold hover:bg-slate-200 transition-all flex items-center gap-2">
-             <Download className="w-4 h-4"/> Export PDF
-           </button>
+           </Button>
+           <Button variant="default" onClick={() => window.print()} size="sm" className="gap-2">
+             <Download className="w-4 h-4"/> Export
+           </Button>
         </div>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {ideas.map((idea) => (
-          <div key={idea.id} className="group bg-slate-900 border border-slate-800 hover:border-blue-500/50 rounded-xl p-6 transition-all hover:bg-slate-900/80 hover:shadow-xl hover:shadow-blue-900/10 flex flex-col h-full relative overflow-hidden">
-            {/* Hover Glow */}
-            <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 to-indigo-600 opacity-0 group-hover:opacity-10 blur transition duration-500"></div>
-            
-            <div className="relative z-10 flex flex-col h-full">
-              <div className="flex justify-between items-start mb-4">
-                <div className="flex items-center gap-3">
-                  <span className="text-xs font-mono text-slate-500 bg-slate-950 px-2 py-1 rounded border border-slate-800">{String(idea.id).padStart(2, '0')}</span>
-                  <span className="text-xs font-bold uppercase tracking-wider text-blue-400">{idea.type}</span>
+          <Card key={idea.id} className="group hover:border-primary/50 transition-all hover:shadow-lg relative overflow-hidden flex flex-col h-full">
+            <CardHeader className="pb-2">
+              <div className="flex justify-between items-start">
+                <div className="flex items-center gap-2">
+                   <Badge variant="outline" className="font-mono text-xs">{String(idea.id).padStart(2, '0')}</Badge>
+                   <Badge className="text-[10px] uppercase font-bold">{idea.type}</Badge>
                 </div>
-                <button 
-                  onClick={() => handleCopy(idea.hook, idea.id)}
-                  className="text-slate-500 hover:text-white transition-colors"
-                >
-                  {copied === idea.id ? <Check className="w-4 h-4 text-emerald-500"/> : <Copy className="w-4 h-4 opacity-50 group-hover:opacity-100"/>}
-                </button>
+                <Button variant="ghost" size="icon" className="h-8 w-8" onClick={() => handleCopy(idea.hook, idea.id)}>
+                   {copied === idea.id ? <Check className="w-4 h-4 text-primary"/> : <Copy className="w-4 h-4 text-muted-foreground group-hover:text-foreground"/>}
+                </Button>
               </div>
-
-              <div className="mb-6 flex-grow">
-                <p className="text-lg font-medium text-slate-200 group-hover:text-white transition-colors leading-snug">
-                  {idea.hook}
-                </p>
-              </div>
-
-              <div className="grid grid-cols-2 gap-4 pt-4 border-t border-slate-800 mt-auto">
-                <div>
-                  <span className="text-[10px] uppercase text-slate-500 font-bold block mb-1">Angle</span>
-                  <span className="text-sm text-slate-300">{idea.angle}</span>
-                </div>
-                <div className="text-right">
-                  <span className="text-[10px] uppercase text-slate-500 font-bold block mb-1">Format</span>
-                  <span className="text-sm text-slate-300">{idea.format}</span>
-                </div>
-              </div>
-            </div>
-          </div>
+            </CardHeader>
+            <CardContent className="flex-grow pt-4">
+               <p className="text-lg font-medium text-card-foreground group-hover:text-primary transition-colors leading-snug">
+                {idea.hook}
+              </p>
+            </CardContent>
+            <CardFooter className="pt-4 border-t bg-muted/20 mt-auto grid grid-cols-2 gap-4">
+               <div>
+                  <span className="text-[10px] uppercase text-muted-foreground font-bold block mb-1">Angle</span>
+                  <span className="text-sm font-medium">{idea.angle}</span>
+               </div>
+               <div className="text-right">
+                  <span className="text-[10px] uppercase text-muted-foreground font-bold block mb-1">Format</span>
+                  <span className="text-sm font-medium">{idea.format}</span>
+               </div>
+            </CardFooter>
+          </Card>
         ))}
       </div>
     </div>
   );
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-200 selection:bg-blue-500/30">
+    <div className="min-h-screen bg-background text-foreground font-sans selection:bg-primary/20">
       <Navbar />
       <main>
         {step === 0 && <Intro />}
