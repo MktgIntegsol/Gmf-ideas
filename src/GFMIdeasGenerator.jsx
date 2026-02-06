@@ -9,7 +9,6 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter }
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const GFMIdeasGenerator = () => {
   const [step, setStep] = useState(0); 
@@ -19,7 +18,7 @@ const GFMIdeasGenerator = () => {
     niche: '',           
     audience: '',        
     goal: '',            
-    tone: 'Professional', 
+    tone: 'Profesional', 
     contentType: ''      
   });
 
@@ -30,11 +29,11 @@ const GFMIdeasGenerator = () => {
     if (!inputs.niche || !inputs.audience) return;
     setStep(2); 
     const sequences = [
-      "Initializing core systems...",
-      `Analyzing market vector: ${inputs.niche}...`,
-      "Calibrating audience resonance...",
-      "Generating strategic angles...",
-      "Compiling final matrix..."
+      "Iniciando sistemas centrales...",
+      `Analizando vector de mercado: ${inputs.niche}...`,
+      "Calibrando resonancia de audiencia...",
+      "Generando ángulos estratégicos...",
+      "Compilando matriz final..."
     ];
     let i = 0;
     const interval = setInterval(() => {
@@ -51,13 +50,14 @@ const GFMIdeasGenerator = () => {
 
   const generateIdeas = () => {
     const { niche, audience, goal } = inputs;
+    // Traducción dinámica de inserts para que gramaticalmente encajen mejor (simplificado)
     const generatedIdeas = [
-      { id: 1, type: "Contrarian", hook: `"Stop doing ${niche} the hard way. Here is the fix."`, angle: "Efficiency", format: "Opinion", engagement: "High" },
-      { id: 2, type: "Case Study", hook: `"How ${audience} scaled their ${goal} results by 300%."`, angle: "Proof", format: "Case Study", engagement: "Very High" },
-      { id: 3, type: "Mistakes", hook: `"The 3 silent killers of your ${niche} strategy."`, angle: "Fear", format: "Listicle", engagement: "High" },
-      { id: 4, type: "Insight", hook: `"I analyzed top 1% of ${niche} leaders. Here is what I found."`, angle: "Data", format: "Deep Dive", engagement: "High" },
-      { id: 5, type: "Framework", hook: `"My proven framework for effortless ${goal}."`, angle: "System", format: "Guide", engagement: "Very High" },
-      { id: 6, type: "Future", hook: `"Where ${niche} is going in the next 12 months."`, angle: "Trend", format: "Prediction", engagement: "Medium" },
+      { id: 1, type: "Contrarian", hook: `"Deja de hacer ${niche} de la manera difícil. Aquí tienes la solución."`, angle: "Eficiencia", format: "Opinión", engagement: "Alto" },
+      { id: 2, type: "Caso de Estudio", hook: `"Cómo ${audience} escaló sus resultados de ${goal} un 300%."`, angle: "Prueba Social", format: "Caso de Estudio", engagement: "Muy Alto" },
+      { id: 3, type: "Errores", hook: `"Los 3 asesinos silenciosos de tu estrategia de ${niche}."`, angle: "Miedo", format: "Lista", engagement: "Alto" },
+      { id: 4, type: "Insight", hook: `"Analicé al top 1% de líderes en ${niche}. Esto fue lo que encontré."`, angle: "Datos", format: "Análisis Profundo", engagement: "Alto" },
+      { id: 5, type: "Framework", hook: `"Mi sistema probado para conseguir ${goal} sin esfuerzo."`, angle: "Sistema", format: "Guía", engagement: "Muy Alto" },
+      { id: 6, type: "Futuro", hook: `"Hacia dónde se dirige ${niche} en los próximos 12 meses."`, angle: "Tendencia", format: "Predicción", engagement: "Medio" },
     ];
     setIdeas(generatedIdeas);
   };
@@ -68,7 +68,7 @@ const GFMIdeasGenerator = () => {
     setTimeout(() => setCopied(null), 2000);
   };
 
-  // --- Components ---
+  // --- Componentes ---
 
   const Navbar = () => (
     <nav className="w-full h-16 border-b bg-background/80 backdrop-blur fixed top-0 z-50 flex items-center justify-between px-6 lg:px-12">
@@ -77,14 +77,14 @@ const GFMIdeasGenerator = () => {
           G
         </div>
         <div className="leading-tight">
-          <h1 className="font-bold text-sm text-foreground tracking-wide">GFM<span className="text-muted-foreground font-normal">INTELLIGENCE</span></h1>
+          <h1 className="font-bold text-sm text-foreground tracking-wide">GFM<span className="text-muted-foreground font-normal">IDEAS</span></h1>
         </div>
       </div>
       <div className="flex items-center gap-4">
         {step > 0 && (
           <Badge variant="outline" className="gap-2 bg-emerald-500/10 border-emerald-500/20 text-emerald-500 hover:bg-emerald-500/10">
             <div className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse"></div>
-            System Active
+            Sistema Activo
           </Badge>
         )}
       </div>
@@ -94,17 +94,17 @@ const GFMIdeasGenerator = () => {
   const Intro = () => (
     <div className="flex flex-col items-center justify-center min-h-[85vh] px-6 text-center pt-16">
        <Badge variant="secondary" className="mb-8 gap-2 py-1.5 px-4 text-xs font-medium">
-         <ShieldCheck className="w-3.5 h-3.5 text-primary" /> Professional Grade Tool
+         <ShieldCheck className="w-3.5 h-3.5 text-primary" /> Herramienta de Grado Profesional
        </Badge>
        
        <h1 className="text-5xl md:text-7xl font-bold text-foreground tracking-tight mb-6 max-w-4xl animate-in fade-in slide-in-from-bottom-5 duration-700 delay-100">
-         Content Strategy <br/>
-         <span className="text-primary">Engineered.</span>
+         Estrategia de Contenido <br/>
+         <span className="text-primary">Ingeniada.</span>
        </h1>
        
        <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mb-10 leading-relaxed animate-in fade-in slide-in-from-bottom-6 duration-700 delay-200">
-         Generate high-leverage content angles tailored specifically to your niche audience. 
-         Precision engineered for modern creators.
+         Genera ángulos de contenido de alto impacto adaptados específicamente a tu nicho. 
+         Ingeniería de precisión para creadores modernos.
        </p>
        
        <Button 
@@ -112,7 +112,7 @@ const GFMIdeasGenerator = () => {
          size="lg"
          className="h-12 px-8 gap-2 text-base shadow-lg hover:shadow-primary/25 animate-in fade-in slide-in-from-bottom-7 duration-700 delay-300"
        >
-         Initialize System <ArrowRight className="w-4 h-4" />
+         Inicializar Sistema <ArrowRight className="w-4 h-4" />
        </Button>
     </div>
   );
@@ -121,24 +121,24 @@ const GFMIdeasGenerator = () => {
     <div className="min-h-[85vh] flex items-center justify-center px-4 pt-20 pb-10">
       <Card className="w-full max-w-2xl animate-in fade-in zoom-in-95 duration-300 border-muted">
         <CardHeader className="mb-2">
-          <CardTitle>Configure Parameters</CardTitle>
-          <CardDescription>Define the target vector for your content generation matrix.</CardDescription>
+          <CardTitle>Configurar Parámetros</CardTitle>
+          <CardDescription>Define el vector objetivo para tu matriz de generación.</CardDescription>
         </CardHeader>
         <CardContent className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="space-y-2">
-              <Label>Niche</Label>
+              <Label>Nicho / Industria</Label>
               <Input 
                 autoFocus
-                placeholder="e.g. B2B SaaS" 
+                placeholder="ej. B2B SaaS, Marketing..." 
                 value={inputs.niche}
                 onChange={(e) => setInputs({...inputs, niche: e.target.value})}
               />
             </div>
             <div className="space-y-2">
-              <Label>Audience</Label>
+              <Label>Audiencia Objetivo</Label>
               <Input 
-                placeholder="e.g. CTOs" 
+                placeholder="ej. CTOs, Fundadores..." 
                 value={inputs.audience}
                 onChange={(e) => setInputs({...inputs, audience: e.target.value})}
               />
@@ -147,28 +147,28 @@ const GFMIdeasGenerator = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="space-y-2">
-              <Label>Goal</Label>
+              <Label>Objetivo Principal</Label>
               <Select onValueChange={(val) => setInputs({...inputs, goal: val})}>
                 <SelectTrigger>
-                  <SelectValue placeholder="Select objective..." />
+                  <SelectValue placeholder="Seleccionar objetivo..." />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="Lead Generation">Lead Generation</SelectItem>
-                  <SelectItem value="Thought Leadership">Thought Leadership</SelectItem>
-                  <SelectItem value="Brand Awareness">Brand Awareness</SelectItem>
+                  <SelectItem value="Lead Generation">Generación de Leads</SelectItem>
+                  <SelectItem value="Thought Leadership">Liderazgo de Pensamiento</SelectItem>
+                  <SelectItem value="Brand Awareness">Conciencia de Marca</SelectItem>
                 </SelectContent>
               </Select>
             </div>
             <div className="space-y-2">
-              <Label>Tone</Label>
-              <Select onValueChange={(val) => setInputs({...inputs, tone: val})} defaultValue="Professional">
+              <Label>Tono de Voz</Label>
+              <Select onValueChange={(val) => setInputs({...inputs, tone: val})} defaultValue="Profesional">
                 <SelectTrigger>
-                  <SelectValue placeholder="Select tone..." />
+                  <SelectValue placeholder="Seleccionar tono..." />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="Professional">Professional</SelectItem>
-                  <SelectItem value="Contrarian">Contrarian</SelectItem>
-                  <SelectItem value="Empathetic">Empathetic</SelectItem>
+                  <SelectItem value="Profesional">Profesional</SelectItem>
+                  <SelectItem value="Contrarian">Contrarian (Polémico)</SelectItem>
+                  <SelectItem value="Empathetic">Empático</SelectItem>
                 </SelectContent>
               </Select>
             </div>
@@ -180,7 +180,7 @@ const GFMIdeasGenerator = () => {
             disabled={!inputs.niche || !inputs.audience || !inputs.goal}
             className="w-full h-11 text-base font-semibold"
           >
-            <Zap className="mr-2 h-4 w-4" /> Generate Matrix
+            <Zap className="mr-2 h-4 w-4" /> Generar Matriz
           </Button>
         </CardFooter>
       </Card>
@@ -193,7 +193,7 @@ const GFMIdeasGenerator = () => {
         <div className="absolute inset-0 border-t-2 border-primary rounded-full animate-spin"></div>
         <div className="absolute inset-2 border-r-2 border-primary/50 rounded-full animate-spin reverse duration-1000"></div>
       </div>
-      <h3 className="text-xl font-medium text-foreground mb-2">Processing Data</h3>
+      <h3 className="text-xl font-medium text-foreground mb-2">Procesando Datos</h3>
       <p className="text-muted-foreground font-mono text-sm bg-muted px-3 py-1 rounded-md border border-border">{loadingText}</p>
     </div>
   );
@@ -202,7 +202,7 @@ const GFMIdeasGenerator = () => {
     <div className="min-h-screen pt-24 pb-20 px-6 max-w-7xl mx-auto animate-in fade-in slide-in-from-bottom-8 duration-500">
       <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-10 gap-4 border-b pb-8">
         <div>
-          <h2 className="text-3xl font-bold text-foreground mb-2">Content Matrix</h2>
+          <h2 className="text-3xl font-bold text-foreground mb-2">Matriz de Contenido</h2>
           <div className="flex gap-2">
              <Badge variant="secondary" className="font-mono">{inputs.niche}</Badge>
              <Badge variant="secondary" className="font-mono">{inputs.audience}</Badge>
@@ -210,10 +210,10 @@ const GFMIdeasGenerator = () => {
         </div>
         <div className="flex gap-3">
            <Button variant="outline" onClick={() => setStep(1)} size="sm" className="gap-2">
-             <RefreshCw className="w-4 h-4"/> Reset
+             <RefreshCw className="w-4 h-4"/> Reiniciar
            </Button>
            <Button variant="default" onClick={() => window.print()} size="sm" className="gap-2">
-             <Download className="w-4 h-4"/> Export
+             <Download className="w-4 h-4"/> Exportar PDF
            </Button>
         </div>
       </div>
@@ -239,11 +239,11 @@ const GFMIdeasGenerator = () => {
             </CardContent>
             <CardFooter className="pt-4 border-t bg-muted/20 mt-auto grid grid-cols-2 gap-4">
                <div>
-                  <span className="text-[10px] uppercase text-muted-foreground font-bold block mb-1">Angle</span>
+                  <span className="text-[10px] uppercase text-muted-foreground font-bold block mb-1">Ángulo</span>
                   <span className="text-sm font-medium">{idea.angle}</span>
                </div>
                <div className="text-right">
-                  <span className="text-[10px] uppercase text-muted-foreground font-bold block mb-1">Format</span>
+                  <span className="text-[10px] uppercase text-muted-foreground font-bold block mb-1">Formato</span>
                   <span className="text-sm font-medium">{idea.format}</span>
                </div>
             </CardFooter>
