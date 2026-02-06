@@ -1,4 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,60 +7,83 @@
 
 @layer base {
   body {
-    font-family: 'Outfit', sans-serif;
-    background-color: #020617; /* slate-950 */
+    font-family: 'Inter', sans-serif;
+    background-color: #030712; /* gray-950 */
     color: white;
+    overflow-x: hidden;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Space Grotesk', sans-serif;
   }
 }
 
-@layer utilities {
-  .glass {
-    background-color: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(40px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.36);
-  }
-  .glass-card {
-    background-color: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(24px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    transition: all 300ms;
-  }
-  .glass-card:hover {
-    border-color: rgba(255, 255, 255, 0.2);
-    box-shadow: 0 10px 15px -3px rgba(168, 85, 247, 0.1);
-    transform: translateY(-4px);
-  }
-  .glass-input {
-    background-color: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    color: white;
-    outline: none;
-    transition: all 300ms;
-  }
-  .glass-input:focus {
-    border-color: rgba(168, 85, 247, 0.5);
-    box-shadow: 0 0 0 1px rgba(168, 85, 247, 0.5);
-  }
-  .glass-input::placeholder {
-    color: #94a3b8; /* slate-400 */
-  }
-  .text-gradient {
-    background-clip: text;
-    -webkit-background-clip: text;
-    color: transparent;
-    background-image: linear-gradient(to right, #ffffff, #f3e8ff, #cbd5e1);
-  }
-  .btn-primary {
-    background-image: linear-gradient(to right, #9333ea, #2563eb);
-    color: white;
-    font-weight: 700;
-    box-shadow: 0 10px 15px -3px rgba(88, 28, 135, 0.2);
-    transition: all 300ms;
-  }
-  .btn-primary:hover {
-    background-image: linear-gradient(to right, #a855f7, #3b82f6);
-    box-shadow: 0 10px 15px -3px rgba(168, 85, 247, 0.3);
-    transform: scale(1.02);
-  }
+/* Custom Glass Utilities - Robust & Visible */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
 }
+
+.glass-input {
+  background: rgba(255, 255, 255, 0.05); /* Más visible */
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #fff;
+  transition: all 0.3s ease;
+}
+
+.glass-input:focus {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: #a855f7; /* Purple-500 */
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(168, 85, 247, 0.15);
+}
+
+.glass-input::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.glass-card {
+  background: linear-gradient(145deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.01) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.glass-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(168, 85, 247, 0.4);
+  box-shadow: 0 20px 40px -5px rgba(0,0,0,0.4);
+}
+
+.btn-glow {
+  background: linear-gradient(135deg, #7c3aed 0%, #4f46e5 100%);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.btn-glow:hover {
+  transform: scale(1.02);
+  box-shadow: 0 0 30px rgba(124, 58, 237, 0.5);
+}
+
+/* Animations */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+.animate-float { animation: float 6s ease-in-out infinite; }
+
+@keyframes float-delayed {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+}
+.animate-float-delayed { animation: float-delayed 8s ease-in-out infinite; animation-delay: 2s; }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: #0f172a; }
+::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #475569; }
