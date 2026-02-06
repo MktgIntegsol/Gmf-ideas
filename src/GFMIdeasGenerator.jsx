@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { 
-  Plus, ArrowRight, Download, RefreshCw, Sparkles, 
-  Copy, Check, Share2, Box, Layers, Zap, MoreHorizontal,
-  LayoutTemplate, LineChart, FileText
+  Plus, ArrowRight, Download, RefreshCw, Zap, 
+  Copy, Check, MoreHorizontal, LayoutTemplate, 
+  FileText, Layers
 } from 'lucide-react';
 
 const GFMIdeasGenerator = () => {
@@ -13,17 +13,12 @@ const GFMIdeasGenerator = () => {
     niche: '',           
     audience: '',        
     goal: '',            
-    tone: 'profesional', 
+    tone: 'Professional', 
     contentType: ''      
   });
 
   const [ideas, setIdeas] = useState([]);
   const [copied, setCopied] = useState(null);
-
-  // Forza modo oscuro por defecto para el estilo "Lovable Dark"
-  useEffect(() => {
-    document.documentElement.classList.add('dark');
-  }, []);
 
   const runSimulation = () => {
     if (!inputs.niche || !inputs.audience) return;
@@ -77,98 +72,105 @@ const GFMIdeasGenerator = () => {
     setTimeout(() => setCopied(null), 2000);
   };
 
-  // --- COMPONENTES ---
+  // --- Components ---
 
   const Header = () => (
-    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container mx-auto max-w-6xl px-4 h-14 flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <div className="h-6 w-6 rounded bg-primary flex items-center justify-center text-primary-foreground font-bold text-xs">G</div>
-          <span className="font-semibold text-sm tracking-tight">GFM Intelligence</span>
+    <header className="sticky top-0 z-50 w-full border-b border-zinc-800 bg-zinc-950/80 backdrop-blur-md">
+      <div className="container mx-auto max-w-6xl px-6 h-16 flex items-center justify-between">
+        <div className="flex items-center gap-3">
+          <div className="h-8 w-8 rounded-lg bg-zinc-100 text-zinc-950 flex items-center justify-center font-bold text-sm">G</div>
+          <span className="font-medium text-sm tracking-tight text-white">GFM Intelligence</span>
         </div>
-        <div className="flex items-center gap-4 text-sm text-muted-foreground">
-           {step > 0 && <span className="flex items-center gap-2 text-xs border rounded-full px-2 py-0.5"><div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></div> Operational</span>}
+        <div className="flex items-center gap-4 text-xs font-medium text-zinc-500">
+           {step > 0 && (
+             <span className="flex items-center gap-2 border border-zinc-800 rounded-full px-3 py-1 bg-zinc-900/50">
+               <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></div> 
+               Operational
+             </span>
+           )}
         </div>
       </div>
     </header>
   );
 
   const Intro = () => (
-    <div className="flex flex-col items-center text-center justify-center py-24 md:py-32 animate-in space-y-8 max-w-3xl mx-auto px-6">
-       <div className="inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80">
-          v2.0 Released
+    <div className="flex flex-col items-center text-center justify-center min-h-[80vh] px-6 animate-in fade-in zoom-in duration-500">
+       <div className="mb-8 inline-flex items-center rounded-full border border-zinc-800 bg-zinc-900/50 px-3 py-1 text-xs font-medium text-zinc-400">
+          <span className="mr-2 inline-block h-1.5 w-1.5 rounded-full bg-indigo-500"></span>
+          Params v2.0 Available
        </div>
-       <h1 className="text-4xl md:text-6xl font-bold tracking-tight lg:text-7xl">
+       <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-white mb-6 max-w-4xl leading-[1.1]">
          Content strategy, <br/>
-         <span className="text-muted-foreground">engineereed.</span>
+         <span className="text-zinc-500">engineered.</span>
        </h1>
-       <p className="text-xl text-muted-foreground max-w-[600px]">
+       <p className="text-lg md:text-xl text-zinc-400 max-w-2xl mb-10 leading-relaxed font-light">
           Generate high-leverage content angles tailored to your niche. 
           Stop guessing, start publishing.
        </p>
-       <div className="flex gap-4 pt-4">
-          <button onClick={() => setStep(1)} className="btn-primary h-12 px-8 text-base">
-            Start Generator <ArrowRight className="ml-2 w-4 h-4"/>
-          </button>
-       </div>
+       <button 
+         onClick={() => setStep(1)} 
+         className="h-12 px-8 rounded-lg bg-white text-zinc-950 font-medium text-sm hover:bg-zinc-200 transition-colors flex items-center gap-2"
+       >
+         Start Generator <ArrowRight className="w-4 h-4"/>
+       </button>
     </div>
   );
 
   const InputForm = () => (
-    <div className="w-full max-w-2xl mx-auto animate-in pt-12 px-6">
-      <div className="card-base p-8 space-y-8">
-        <div className="space-y-2">
-          <h2 className="text-2xl font-semibold tracking-tight">Configure Parameters</h2>
-          <p className="text-sm text-muted-foreground">Define your target vector for content generation.</p>
+    <div className="w-full max-w-3xl mx-auto pt-20 px-6 animate-in slide-in-from-bottom-5 fade-in duration-500">
+      <div className="rounded-xl border border-zinc-800 bg-zinc-900/50 p-8 md:p-12 shadow-2xl">
+        <div className="mb-10 text-center md:text-left">
+          <h2 className="text-2xl font-semibold text-white mb-2">Configure Parameters</h2>
+          <p className="text-zinc-500">Define your target vector for content generation.</p>
         </div>
 
-        <div className="space-y-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-             <div className="space-y-2">
-                <label className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">Niche / Industry</label>
+        <div className="space-y-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+             <div className="space-y-3">
+                <label className="text-xs font-medium uppercase tracking-wider text-zinc-500">Niche / Industry</label>
                 <input 
                    autoFocus
                    type="text" 
                    placeholder="e.g. B2B SaaS, Fintech..." 
-                   className="input-field"
+                   className="flex h-12 w-full rounded-lg border border-zinc-700 bg-zinc-950 px-4 text-sm text-white placeholder:text-zinc-600 focus:border-white focus:outline-none transition-colors"
                    value={inputs.niche}
                    onChange={(e) => setInputs({...inputs, niche: e.target.value})}
                 />
              </div>
-             <div className="space-y-2">
-                <label className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">Target Audience</label>
+             <div className="space-y-3">
+                <label className="text-xs font-medium uppercase tracking-wider text-zinc-500">Target Audience</label>
                 <input 
                    type="text" 
                    placeholder="e.g. CTOs, Freelancers..." 
-                   className="input-field"
+                   className="flex h-12 w-full rounded-lg border border-zinc-700 bg-zinc-950 px-4 text-sm text-white placeholder:text-zinc-600 focus:border-white focus:outline-none transition-colors"
                    value={inputs.audience}
                    onChange={(e) => setInputs({...inputs, audience: e.target.value})}
                 />
              </div>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-             <div className="space-y-2">
-                <label className="text-sm font-medium leading-none">Primary Goal</label>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+             <div className="space-y-3">
+                <label className="text-xs font-medium uppercase tracking-wider text-zinc-500">Primary Goal</label>
                 <div className="relative">
                    <select 
-                     className="input-field appearance-none"
+                     className="flex h-12 w-full appearance-none rounded-lg border border-zinc-700 bg-zinc-950 px-4 text-sm text-white focus:border-white focus:outline-none transition-colors cursor-pointer"
                      value={inputs.goal}
                      onChange={(e) => setInputs({...inputs, goal: e.target.value})}
                    >
-                     <option value="">Select goal...</option>
+                     <option value="" className="text-zinc-500">Select goal...</option>
                      <option value="Lead Generation">Lead Generation</option>
                      <option value="Thought Leadership">Thought Leadership</option>
                      <option value="Brand Awareness">Brand Awareness</option>
                    </select>
-                   <div className="absolute right-3 top-2.5 pointer-events-none opacity-50"><MoreHorizontal className="w-4 h-4"/></div>
+                   <MoreHorizontal className="absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-500 pointer-events-none"/>
                 </div>
              </div>
-             <div className="space-y-2">
-                <label className="text-sm font-medium leading-none">Tone of Voice</label>
+             <div className="space-y-3">
+                <label className="text-xs font-medium uppercase tracking-wider text-zinc-500">Tone of Voice</label>
                 <div className="relative">
                    <select 
-                     className="input-field appearance-none"
+                     className="flex h-12 w-full appearance-none rounded-lg border border-zinc-700 bg-zinc-950 px-4 text-sm text-white focus:border-white focus:outline-none transition-colors cursor-pointer"
                      value={inputs.tone}
                      onChange={(e) => setInputs({...inputs, tone: e.target.value})}
                    >
@@ -176,19 +178,20 @@ const GFMIdeasGenerator = () => {
                      <option value="Contrarian">Contrarian</option>
                      <option value="Empathetic">Empathetic</option>
                    </select>
-                   <div className="absolute right-3 top-2.5 pointer-events-none opacity-50"><MoreHorizontal className="w-4 h-4"/></div>
+                   <MoreHorizontal className="absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-500 pointer-events-none"/>
                 </div>
              </div>
           </div>
         </div>
 
-        <div className="pt-4 flex justify-end">
+        <div className="mt-12 flex justify-end">
            <button 
              onClick={runSimulation}
              disabled={!inputs.niche || !inputs.audience || !inputs.goal}
-             className="btn-primary w-full md:w-auto"
+             className="w-full md:w-auto h-12 px-8 rounded-lg bg-white text-zinc-950 font-bold text-sm hover:bg-zinc-200 disabled:opacity-50 disabled:cursor-not-allowed transition-all flex items-center justify-center gap-2 shadow-lg shadow-white/5"
            >
-             <Zap className="mr-2 w-4 h-4" /> Generate Matrix
+             <Zap className="w-4 h-4" /> 
+             Generate Matrix
            </button>
         </div>
       </div>
@@ -196,68 +199,74 @@ const GFMIdeasGenerator = () => {
   );
 
   const Loading = () => (
-    <div className="flex flex-col items-center justify-center py-32 space-y-6 animate-in">
-       <div className="relative flex h-8 w-8">
-          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-20"></span>
-          <span className="relative inline-flex rounded-full h-8 w-8 bg-primary"></span>
+    <div className="flex flex-col items-center justify-center min-h-[60vh] space-y-8 animate-in fade-in duration-700">
+       <div className="relative flex h-16 w-16">
+          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-20"></span>
+          <span className="relative inline-flex rounded-full h-16 w-16 border-2 border-white/20 items-center justify-center">
+             <div className="w-4 h-4 bg-white rounded-full"></div>
+          </span>
        </div>
-       <div className="space-y-2 text-center">
-          <h3 className="text-lg font-medium">Processing</h3>
-          <p className="text-sm text-muted-foreground font-mono">{loadingText}</p>
+       <div className="space-y-3 text-center">
+          <h3 className="text-xl font-medium text-white tracking-tight">Processing Intelligence</h3>
+          <p className="text-sm text-zinc-500 font-mono bg-zinc-900/50 px-4 py-2 rounded-full border border-zinc-800 animate-pulse">
+            {loadingText}
+          </p>
        </div>
     </div>
   );
 
   const Results = () => (
-    <div className="w-full max-w-6xl mx-auto px-6 py-8 animate-in h-[calc(100vh-3.5rem)] flex flex-col">
-       <div className="flex items-center justify-between mb-8">
+    <div className="w-full max-w-7xl mx-auto px-6 py-10 animate-in fade-in slide-in-from-bottom-4 duration-500 mb-20">
+       <div className="flex flex-col md:flex-row md:items-center justify-between mb-10 gap-6">
           <div className="space-y-1">
-             <h2 className="text-2xl font-semibold tracking-tight">Content Matrix</h2>
-             <div className="flex gap-2 text-sm text-muted-foreground">
-                <span className="border px-2 py-0.5 rounded text-xs">{inputs.niche}</span>
-                <span className="border px-2 py-0.5 rounded text-xs">{inputs.audience}</span>
+             <h2 className="text-3xl font-semibold text-white tracking-tight">Content Matrix</h2>
+             <div className="flex gap-2 text-xs font-mono text-zinc-500 pt-2">
+                <span className="border border-zinc-800 bg-zinc-900 px-2 py-1 rounded uppercase">{inputs.niche}</span>
+                <span className="border border-zinc-800 bg-zinc-900 px-2 py-1 rounded uppercase">{inputs.audience}</span>
              </div>
           </div>
-          <div className="flex gap-2">
-             <button onClick={() => setStep(1)} className="btn-secondary">
-               <RefreshCw className="mr-2 w-4 h-4"/> Reset
+          <div className="flex gap-3">
+             <button onClick={() => setStep(1)} className="h-10 px-4 rounded-md border border-zinc-800 bg-transparent text-sm font-medium text-zinc-400 hover:text-white hover:border-zinc-600 transition-colors flex items-center gap-2">
+               <RefreshCw className="w-4 h-4"/> Reset
              </button>
-             <button onClick={() => window.print()} className="btn-secondary">
-               <Download className="mr-2 w-4 h-4"/> Export
+             <button onClick={() => window.print()} className="h-10 px-4 rounded-md bg-white text-zinc-950 text-sm font-medium hover:bg-zinc-200 transition-colors flex items-center gap-2">
+               <Download className="w-4 h-4"/> Export PDF
              </button>
           </div>
        </div>
 
-       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 overflow-y-auto pb-10 pr-2">
+       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {ideas.map((idea) => (
-             <div key={idea.id} className="card-base p-5 flex flex-col h-full hover:border-primary/50 transition-colors group">
-                <div className="flex justify-between items-start mb-4">
-                   <div className="flex items-center gap-2">
-                      <span className="text-[10px] font-mono text-muted-foreground border px-1.5 rounded">{String(idea.id).padStart(2, '0')}</span>
-                      <span className="badge border-transparent bg-secondary text-secondary-foreground hover:bg-secondary/80">
+             <div key={idea.id} className="group relative flex flex-col rounded-xl border border-zinc-800 bg-zinc-950/50 hover:bg-zinc-900/50 p-6 transition-all duration-300 hover:border-zinc-700 hover:shadow-2xl hover:shadow-black/50">
+                <div className="flex justify-between items-start mb-5">
+                   <div className="flex items-center gap-3">
+                      <span className="flex h-6 min-w-[1.5rem] items-center justify-center rounded border border-zinc-800 bg-zinc-900 text-[10px] font-mono text-zinc-500">
+                        {String(idea.id).padStart(2, '0')}
+                      </span>
+                      <span className="inline-flex items-center rounded-md border border-zinc-800 bg-zinc-950 px-2 py-1 text-xs font-medium text-zinc-400 group-hover:text-white group-hover:border-zinc-600 transition-colors">
                          {idea.type}
                       </span>
                    </div>
                    <button 
                      onClick={() => handleCopy(idea.hook, idea.id)}
-                     className="text-muted-foreground hover:text-foreground transition-colors"
+                     className="text-zinc-500 hover:text-white transition-colors"
                    >
-                     {copied === idea.id ? <Check className="w-4 h-4"/> : <Copy className="w-4 h-4 opacity-0 group-hover:opacity-100"/>}
+                     {copied === idea.id ? <Check className="w-4 h-4 text-emerald-500"/> : <Copy className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity"/>}
                    </button>
                 </div>
                 
-                <p className="text-sm font-medium leading-relaxed mb-6 flex-grow">
+                <p className="text-base font-medium text-zinc-300 leading-relaxed mb-8 flex-grow group-hover:text-white transition-colors">
                    {idea.hook}
                 </p>
                 
-                <div className="grid grid-cols-2 gap-4 mt-auto pt-4 border-t text-xs text-muted-foreground">
+                <div className="grid grid-cols-2 gap-4 mt-auto pt-5 border-t border-zinc-800/50 text-xs">
                    <div>
-                      <span className="block opacity-50 mb-0.5">Focus</span>
-                      <span className="font-medium text-foreground">{idea.angle}</span>
+                      <span className="block text-zinc-600 mb-1 font-medium uppercase tracking-wider">Angle</span>
+                      <span className="text-zinc-300 font-medium">{idea.angle}</span>
                    </div>
                    <div className="text-right">
-                      <span className="block opacity-50 mb-0.5">Format</span>
-                      <span className="font-medium text-foreground">{idea.format}</span>
+                      <span className="block text-zinc-600 mb-1 font-medium uppercase tracking-wider">Format</span>
+                      <span className="text-zinc-300 font-medium">{idea.format}</span>
                    </div>
                 </div>
              </div>
@@ -267,7 +276,7 @@ const GFMIdeasGenerator = () => {
   );
 
   return (
-    <div className="min-h-screen bg-background text-foreground font-sans">
+    <div className="min-h-screen bg-zinc-950 text-zinc-200 font-sans antialiased selection:bg-white/20">
       <Header />
       <main className="flex-1 w-full flex flex-col">
         {step === 0 && <Intro />}
